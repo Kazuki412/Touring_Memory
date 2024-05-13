@@ -1,24 +1,31 @@
-# README
+# Touring_Memory
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+自分がツーリングした記録を投稿<br>
+他のユーザーと共有し、繋がりを増やすSNSサイト
 
-Things you may want to cover:
+### テーマを選んだ理由
+カレンダー機能、外部API導入の練習のため<br>
+自分自身、ツーリングしますがいつも1人なのでこのようなサイトがあれば、気軽にツーリング仲間を作れるのではないかと考えました。
 
-* Ruby version
+### ターゲットユーザー
+* バイクユーザー
+* 1人ではなく誰かとツーリングを楽しみたい方
 
-* System dependencies
+### 主な利用シーン
+* 自身のツーリング予定の作成・確認
+* ツーリング記録の作成
+* バイクユーザーとのコミュニケーション
 
-* Configuration
+## 設計書
+後ほど作成予定
 
-* Database creation
+## 開発環境
+* OS:Linux
+* 言語:HTML,CSS,JavaScript,Ruby,SQL
+* フレームワーク:Ruby on Rails
+* JSライブラリ:jQuery
+* IDE:VScode
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
