@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'blogs/new'
+  get 'blogs/index'
+  get 'blogs/show'
+  get 'blogs/edit'
   root to: "homes#top"
   # ユーザー用
   devise_for :users, skip: [:passwords], controllers: {
