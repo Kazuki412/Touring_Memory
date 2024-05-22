@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: "homes#top"
+  root to: "public/homes#top"
   # ユーザー用
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   #ユーザー用
   scope module: :public do
     resources :blogs, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :users, only: [:show, :edit, :update]
   end
 
   #管理者用
