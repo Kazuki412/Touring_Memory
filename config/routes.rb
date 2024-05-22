@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  get 'blogs/new'
-  get 'blogs/index'
-  get 'blogs/show'
-  get 'blogs/edit'
+
   root to: "homes#top"
   # ユーザー用
   devise_for :users, skip: [:passwords], controllers: {
@@ -15,4 +12,14 @@ Rails.application.routes.draw do
     registrations: "admin/registrations",
     sessions: "admin/sessions"
   }
+
+  #ユーザー用
+  scope module: public do
+    resources :blogs, only[:new, :create, :index, :show, :edit, :update, :destroy]
+  end
+
+  #管理者用
+  namespace :admin do
+    
+  end
 end
