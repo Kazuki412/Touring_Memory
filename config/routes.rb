@@ -14,12 +14,12 @@ Rails.application.routes.draw do
   }
 
   #ユーザー用
-  scope module: public do
-    resources :blogs, only[:new, :create, :index, :show, :edit, :update, :destroy]
+  scope module: :public do
+    resources :blogs, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   end
 
   #管理者用
   namespace :admin do
-    
+
   end
 end
