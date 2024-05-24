@@ -1,0 +1,16 @@
+<div>
+  <%= image_tag @user.get_profile_image, size: "100x100" %>
+  <%= @user.name %>
+  <%= @user.introduction %>
+  <%# ↓自分以外はフォロー関係のボタン %>
+  <%= link_to "編集", edit_user_path(@user) %>
+  <%# フォロー・フォロワー数（それぞれ一覧ページへのリンクにする） %>
+  <%# DM一覧ページへ（自分以外はそのユーザーとのDMページへ） %>
+</div>
+<%# 後に、投稿一覧、いいねした一覧、カレンダー（自分のみ）をそれぞれタブにする %>
+<% @blogs.each do |blog| %>
+  <div>
+    <p><%= link_to blog.title, blog_path(blog.id) %></p>
+    <%# 投稿した日時 %>
+  </div>
+<% end %>
