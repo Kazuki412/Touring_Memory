@@ -1,2 +1,11 @@
-<h1>Public::Blogs#show</h1>
-<p>Find me in app/views/public/blogs/show.html.erb</p>
+<div>
+  <%= image_tag @blog.user.get_profile_image, size: "100x100" %>
+  <%= @blog.user.name %>
+  <%= @blog.user.introduction %>
+</div>
+<div>
+  <%= @blog.title %>
+  <%= @blog.body %>
+  <%= link_to "編集", edit_blog_path(@blog) %>
+  <%= link_to "削除", blog_path(@blog), data: { turbo_method: :delete } %>
+</div>

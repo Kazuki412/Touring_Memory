@@ -1,2 +1,12 @@
-<h1>Public::Blogs#edit</h1>
-<p>Find me in app/views/public/blogs/edit.html.erb</p>
+<h1>編集</h1>
+<%= form_with model: @blog, method: :patch do |f| %>
+  <div>
+    <%= f.label :title, "タイトル" %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :body, "本文" %><br>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit "更新" %>
+<% end %>
