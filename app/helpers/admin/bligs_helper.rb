@@ -1,0 +1,2 @@
+module Admin::BligsHelper
+end

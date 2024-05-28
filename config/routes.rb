@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 
   #管理者用
   devise_for :admin, skip: [:passwords], controllers: {
-    registrations: "admin/registrations",
     sessions: "admin/sessions"
   }
 
@@ -20,7 +19,10 @@ Rails.application.routes.draw do
   end
 
   #管理者用
+  get "admin" => "admin/users#index"
   namespace :admin do
-
+    resources :users, only: [:show, :update]
+    resources :blogs, only: [:index, :show, :destroy]
+    resources :comments, only: [:index, :destroy]
   end
 end

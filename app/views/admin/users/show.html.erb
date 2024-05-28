@@ -1,0 +1,9 @@
+<%= image_tag @user.get_profile_image, size: "100x100" %>
+<%= @user.name %>
+<%= @user.introduction %>
+<%# 後に、フォロー・フォロワー数、ステータス編集機能実装予定 %>
+
+<% @blogs.each do |blog| %>
+  <%= link_to blog.title, admin_blog_path(blog) %>
+  <%# 作成日時 %>
+<% end %>
