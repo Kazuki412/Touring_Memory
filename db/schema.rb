@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_19_105805) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_30_043347) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -51,6 +51,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_105805) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "blog_comments", force: :cascade do |t|
+    t.string "comment"
+    t.integer "user_id", null: false
+    t.integer "blog_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_id"], name: "index_blog_comments_on_blog_id"
+    t.index ["user_id"], name: "index_blog_comments_on_user_id"
+  end
+
   create_table "blogs", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -76,5 +86,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_105805) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "blog_comments", "blogs"
+  add_foreign_key "blog_comments", "users"
   add_foreign_key "blogs", "users"
 end

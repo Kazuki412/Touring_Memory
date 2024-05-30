@@ -2,8 +2,9 @@
 <div><%= link_to "新規投稿", new_blog_path %></div>
 <% @blogs.each do |blog| %>
   <div>
-    <p><%= link_to blog.title, blog_path(blog) %></p>
-    <p><%= image_tag blog.user.get_profile_image, size: "100x100" %></p>
-    <p><%= link_to blog.user.name, user_path(blog.user) %></p>
+    <p>ブログタイトル：<%= link_to blog.title, blog_path(blog) %></p>
+    <p>ユーザー画像：<%= image_tag blog.user.get_profile_image, size: "100x100" %></p>
+    <p>ユーザー名：<%= link_to blog.user.name, user_path(blog.user) %></p>
+    <p><%= link_to "#{blog.blog_comments.count} コメント", blog_path(blog) %></p>
   </div>
 <% end %>

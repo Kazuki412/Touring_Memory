@@ -1,11 +1,30 @@
 <div>
-  <%= image_tag @blog.user.get_profile_image, size: "100x100" %>
-  <%= @blog.user.name %>
-  <%= @blog.user.introduction %>
+  <p>ユーザー画像：<%= image_tag @blog.user.get_profile_image, size: "100x100" %></p>
+  <p>ユーザー名：<%= @blog.user.name %></p>
+  <p>自己紹介：<%= @blog.user.introduction %></p>
 </div>
 <div>
-  <%= @blog.title %>
-  <%= @blog.body %>
+  <p>タイトル：<%= @blog.title %></p>
+  <p>本文：<%= @blog.body %></p>
   <%= link_to "編集", edit_blog_path(@blog) %>
   <%= link_to "削除", blog_path(@blog), data: { turbo_method: :delete } %>
+</div>
+
+<div>
+  <p>コメント件数：<%= @blog.blog_comments.count %></p>
+  <% @blog.blog_comments.each do |blog_comment| %>
+    <p>コメントしたユーザー画像：<%= image_tag blog_comment.user.get_profile_image, size: "50x50" %></p>
+    <p>コメントしたユーザー名：<%= blog_comment.user.name %></p>
+    <p>コメント内容：<%= blog_comment.comment %></p>
+    <p>コメント日時<%= blog_comment.created_at.strftime("%y/%m/%d") %></p>
+  <% if blog_comment.user == current_user %>
+    <%= link_to "削除", blog_blog_comment_path(blog_comment.blog, blog_comment), data: { turbo_method: :delete } %>
+  <% end %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@blog, @blog_comment] do |f| %>
+    <%= f.text_field :comment %>
+    <%= f.submit "送信" %>
+  <% end %>
 </div>
