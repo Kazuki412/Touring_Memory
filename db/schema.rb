@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_30_043347) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_30_052413) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -70,6 +70,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_043347) do
     t.index ["user_id"], name: "index_blogs_on_user_id"
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "blog_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_id"], name: "index_favorites_on_blog_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.text "introduction"
@@ -89,4 +98,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_30_043347) do
   add_foreign_key "blog_comments", "blogs"
   add_foreign_key "blog_comments", "users"
   add_foreign_key "blogs", "users"
+  add_foreign_key "favorites", "blogs"
+  add_foreign_key "favorites", "users"
 end

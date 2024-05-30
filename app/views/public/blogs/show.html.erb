@@ -6,8 +6,23 @@
 <div>
   <p>タイトル：<%= @blog.title %></p>
   <p>本文：<%= @blog.body %></p>
+<% if @blog.user == current_user %>
   <%= link_to "編集", edit_blog_path(@blog) %>
   <%= link_to "削除", blog_path(@blog), data: { turbo_method: :delete } %>
+<% end %>
+<% if @blog.favorited_by?(current_user) %>
+  <p>
+    <%= link_to blog_favorite_path(@blog), data: { turbo_method: :delete } do %>
+      ♥️<%= @blog.favorites.count %> いいね
+    <% end %>
+  </p>
+  <% else %>
+    <p>
+      <%= link_to blog_favorite_path(@blog), data: { turbo_method: :post } do %>
+        ♡<%= @blog.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
 </div>
 
 <div>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   #ユーザー用
   scope module: :public do
     resources :blogs, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      resource :favorite, only: [:create, :destroy]
       resources :blog_comments, only: [:create, :destroy]
     end
     resources :users, only: [:show, :edit, :update]

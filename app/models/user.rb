@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   has_many :blogs, dependent: :destroy
   has_many :blog_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   
   has_one_attached :profile_image
 
