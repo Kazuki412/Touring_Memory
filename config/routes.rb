@@ -18,7 +18,12 @@ Rails.application.routes.draw do
       resource :favorite, only: [:create, :destroy]
       resources :blog_comments, only: [:create, :destroy]
     end
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update] do
+      member do
+        get :follows, :followers
+      end
+        resource :relationship, only: [:create, :destroy]
+    end
   end
 
   #管理者用

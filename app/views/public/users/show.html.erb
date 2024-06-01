@@ -2,9 +2,19 @@
   <p>ユーザー画像：<%= image_tag @user.get_profile_image, size: "100x100" %></p>
   <p>ユーザー名：<%= @user.name %></p>
   <p>自己紹介：<%= @user.introduction %></p>
-  <%# ↓自分以外はフォロー関係のボタン %>
+<%# ↓自分以外はフォロー関係のボタン %>
+<% if @user == current_user %>
   <%= link_to "編集", edit_user_path(@user) %>
-  <%# フォロー・フォロワー数（それぞれ一覧ページへのリンクにする） %>
+<% else %>
+  <% if current_user.following?(@user) %>
+    <%= link_to "フォローを外す", user_relationship_path(@user), data: { turbo_method: :delete } %>
+  <% else %>
+    <%= link_to "フォローする", user_relationship_path(@user), data: { turbo_method: :post } %>
+  <% end %>
+<% end %>
+<%# フォロー・フォロワー数（それぞれ一覧ページへのリンクにする） %>
+  <p>フォロー数：<%= link_to @user.followers.count, follows_user_path(@user) %></p>
+  <p>フォロワー数：<%= link_to @user.followeds.count, followers_user_path(@user) %></p>
   <%# DM一覧ページへ（自分以外はそのユーザーとのDMページへ） %>
 </div>
 <%# 後に、投稿一覧、いいねした一覧、カレンダー（自分のみ）をそれぞれタブにする %>

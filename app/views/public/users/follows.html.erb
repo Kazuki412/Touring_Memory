@@ -1,0 +1,10 @@
+<h1>フォロー一覧</h1>
+<% @users.each do |user| %>
+  <div>
+    <p>ユーザー画像：<%= image_tag user.get_profile_image, size: "100x100" %></p>
+    <p>ユーザー名：<%= link_to user.name, user_path(user) %></p>
+    <p>フォロー数：<%= link_to user.followers.count, follows_user_path(user) %></p>
+    <p>フォロワー数：<%= link_to user.followeds.count, followers_user_path(user) %></p>
+    <p>自己紹介：<%= user.introduction %></p>
+  </div>
+<% end %>
