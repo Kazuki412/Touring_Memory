@@ -18,6 +18,8 @@ class User < ApplicationRecord
   # フォロー・フォロワー一覧で使用
   has_many :following_users, through: :followers, source: :followed
   has_many :follower_users, through: :followeds, source: :follower
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   has_one_attached :profile_image
 

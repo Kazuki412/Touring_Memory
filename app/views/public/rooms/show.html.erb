@@ -1,0 +1,15 @@
+<%= link_to "戻る", rooms_path %>
+<p>★トーク参加者</p>
+<% @entries.each do |entry| %>
+  <p><%= entry.user.name %></p>
+<% end %>
+<p>⚫︎トーク内容</p>
+<% @messages.each do |message| %>
+  <%= message.content %>
+  <%= message.user.name %><br>
+<% end %>
+<%= form_with model: @message, data: { turbo_method: :post } do |f| %>
+  <%= f.text_field :content %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+  <%= f.submit "送信" %>
+<% end %>

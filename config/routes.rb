@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       end
         resource :relationship, only: [:create, :destroy]
     end
+    resources :messages, only: [:create]
+    resources :rooms, only: [:create, :index, :show, :destroy]
   end
 
   #管理者用

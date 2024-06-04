@@ -3,19 +3,33 @@
   <p>ユーザー名：<%= @user.name %></p>
   <p>自己紹介：<%= @user.introduction %></p>
 <%# ↓自分以外はフォロー関係のボタン %>
-<% if @user == current_user %>
-  <%= link_to "編集", edit_user_path(@user) %>
-<% else %>
-  <% if current_user.following?(@user) %>
-    <%= link_to "フォローを外す", user_relationship_path(@user), data: { turbo_method: :delete } %>
+  <% if @user == current_user %>
+    <%= link_to "編集", edit_user_path(@user) %>
   <% else %>
-    <%= link_to "フォローする", user_relationship_path(@user), data: { turbo_method: :post } %>
+    <% if current_user.following?(@user) %>
+      <%= link_to "フォローを外す", user_relationship_path(@user), data: { turbo_method: :delete } %>
+    <% else %>
+      <%= link_to "フォローする", user_relationship_path(@user), data: { turbo_method: :post } %>
+    <% end %>
   <% end %>
-<% end %>
 <%# フォロー・フォロワー数（それぞれ一覧ページへのリンクにする） %>
   <p>フォロー数：<%= link_to @user.followers.count, follows_user_path(@user) %></p>
   <p>フォロワー数：<%= link_to @user.followeds.count, followers_user_path(@user) %></p>
-  <%# DM一覧ページへ（自分以外はそのユーザーとのDMページへ） %>
+<%# DM一覧ページへ（自分以外はそのユーザーとのDMページへ） %>
+  <% if @user == current_user %>
+    <%= link_to "DM一覧", rooms_path %>
+  <% else %>
+    <% if @is_room == true %>
+      <%= link_to "DMへ", room_path(@room_id) %>
+    <% else %>
+      <%= form_with model: @room do |f| %>
+        <%= fields_for @entry do |e| %>
+          <%= e.hidden_field :user_id, value: @user.id %>
+        <% end %>
+        <%= f.submit "DMを始める" %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
 <%# 後に、投稿一覧、いいねした一覧、カレンダー（自分のみ）をそれぞれタブにする %>
 <% @blogs.each do |blog| %>

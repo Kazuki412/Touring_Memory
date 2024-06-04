@@ -1,0 +1,14 @@
+<p><%= link_to "戻る", user_path(current_user.id) %></p>
+<% if @my_rooms == nil? %>
+  <p>トークはまだありません</p>
+<% else %>
+  <% @my_rooms.each do |room| %>
+    <%= link_to room_path(room.id) do %>
+      <%= room.id %><br>
+      <%= Message.find_by(id: room.message_ids.last)&.user&.name %><br>
+      <%= Message.find_by(id: room.message_ids.last)&.content %><br>
+      <%= Message.find_by(id: room.message_ids.last)&.created_at&.strftime("%m/%d %h:%m") %>
+    <% end %>
+    <p><%= link_to "トークルームを削除", room_path(room.id), data: { turbo_method: :delete } %></p>
+  <% end %>
+<% end %>
