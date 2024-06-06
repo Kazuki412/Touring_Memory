@@ -32,6 +32,8 @@
   <% end %>
 </div>
 <%# 後に、投稿一覧、いいねした一覧、カレンダー（自分のみ）をそれぞれタブにする %>
+<%# 投稿一覧 %>
+<p><%= @user.name %>さんの投稿一覧</p>
 <% @blogs.each do |blog| %>
   <div>
     <p>ブログタイトル：<%= link_to blog.title, blog_path(blog.id) %></p>
@@ -39,3 +41,11 @@
     <p><%= link_to "コメント #{blog.blog_comments.count}", blog_path(blog) %></p>
   </div>
 <% end %>
+<%# いいね一覧 %>
+<p><%= @user.name %>さんのいいね一覧</p>
+<% @favorite_blogs.each do |blog| %>
+  <p>ユーザー画像：<%= image_tag blog.user.get_profile_image, size: "50x50" %></p>
+  <p>ユーザー名：<%= link_to blog.user.name, user_path(blog.user.id) %></p>
+  <p>ブログタイトル：<%= link_to blog.title, blog_path(blog) %></p>
+<% end %>
+<%# カレンダー %>
