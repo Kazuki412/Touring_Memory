@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
+  # 通知
+  has_many :notifications, dependent: :destroy
   # フォローをした、されたの関係
   has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
