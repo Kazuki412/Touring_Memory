@@ -21,8 +21,10 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update] do
       member do
         get :follows, :followers
+        get :blocks
       end
         resource :relationship, only: [:create, :destroy]
+        resource :block, only: [:create, :destroy]
     end
     resources :messages, only: [:create]
     resources :rooms, only: [:create, :index, :show, :destroy]

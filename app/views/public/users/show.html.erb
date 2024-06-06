@@ -5,12 +5,14 @@
 <%# ↓自分以外はフォロー関係のボタン %>
   <% if @user == current_user %>
     <%= link_to "編集", edit_user_path(@user) %>
+    <p>ブロック数：<%= link_to @user.blockers.count, blocks_user_path(@user) %></p>
+  <% elsif current_user.blocking?(@user) %>
+      <%= link_to "ブロック解除", user_block_path(@user), data: { turbo_method: :delete } %>
+  <% elsif current_user.following?(@user) %>
+      <%= link_to "フォロー解除", user_relationship_path(@user), data: { turbo_method: :delete } %>
   <% else %>
-    <% if current_user.following?(@user) %>
-      <%= link_to "フォローを外す", user_relationship_path(@user), data: { turbo_method: :delete } %>
-    <% else %>
-      <%= link_to "フォローする", user_relationship_path(@user), data: { turbo_method: :post } %>
-    <% end %>
+    <%= link_to "フォローする", user_relationship_path(@user), data: { turbo_method: :post } %>
+    <%= link_to "ブロックする", user_block_path(@user), data: { turbo_method: :post } %>
   <% end %>
 <%# フォロー・フォロワー数（それぞれ一覧ページへのリンクにする） %>
   <p>フォロー数：<%= link_to @user.followers.count, follows_user_path(@user) %></p>

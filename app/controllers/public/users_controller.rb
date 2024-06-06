@@ -48,6 +48,10 @@ class Public::UsersController < ApplicationController
     @users = user.follower_users
   end
 
+  def blocks
+    @users = current_user.blocking_users
+  end
+
   private
 
   def user_params
