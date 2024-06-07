@@ -54,8 +54,6 @@
 <%= month_calendar events: @events do |date, events| %>
   <%= date.day %>
   <% events.each do |event| %>
-    <% if event.is_a?(Blog) %>
-      <%= link_to "⚫︎", blog_path(event) %>
-    <% end %>
+      <%= link_to event.title, event_path(event) %>
   <% end %>
 <% end %>

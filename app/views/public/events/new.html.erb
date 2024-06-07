@@ -1,0 +1,13 @@
+<h1>新規イベント作成</h1>
+<%= form_with model: @event, url: events_path, method: :post do |f| %>
+  <%= f.label :title, "イベントタイトル" %>
+  <%= f.text_field :title %><br>
+
+  <%= f.label :start, "開始日時" %>
+  <%= f.datetime_field :start, value: params[:datetime] %><br>
+
+  <%= f.label :end, "終了日時" %>
+  <%= f.datetime_field :end, value: params[:datetime] %><br>
+
+  <%= f.submit "作成" %>
+<% end %>

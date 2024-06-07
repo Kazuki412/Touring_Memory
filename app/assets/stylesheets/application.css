@@ -37,7 +37,7 @@
     background-color: #d3d3d3;
   }
 }
-/* ホバーした際の背景色 tableタグにcalender_tableクラスを追記しています*/
+/* ホバーした際の背景色 */
 .calendar-table :hover {
   background-color: #FFFF8c;    
 }

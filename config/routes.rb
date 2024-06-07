@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     end
     resources :messages, only: [:create]
     resources :rooms, only: [:create, :index, :show, :destroy]
+    resources :events, only: [:new, :create, :show, :edit, :update, :destroy]
   end
 
   #管理者用
