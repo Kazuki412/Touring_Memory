@@ -1,1 +1,13 @@
 <h1>イベント編集画面</h1>
+<%= form_with model: @event, url: event_path(@event), method: :patch do |f| %>
+  <%= f.label :title, "イベントタイトル" %>
+  <%= f.text_field :title %><br>
+
+  <%= f.label :start, "開始日時" %>
+  <%= f.datetime_field :start, value: params[:datetime] %><br>
+
+  <%= f.label :end, "終了日時" %>
+  <%= f.datetime_field :end, value: params[:datetime] %><br>
+
+  <%= f.submit "変更を反映" %>
+<% end %>

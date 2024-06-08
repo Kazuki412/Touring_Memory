@@ -21,12 +21,12 @@ class Public::EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     @event.update(event_params)
-    redirect_to request.referer
+    redirect_to user_path(current_user.id)
   end
 
   def destroy
     Event.find(params[:id]).destroy
-    redirect_to request.referer
+    redirect_to user_path(current_user.id)
   end
 
   private

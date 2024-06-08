@@ -1,6 +1,8 @@
 <%# 現在は作成したイベントが全て表示、後にユーザー毎に変更予定 %>
-<%# 日時の表示形式は月日時分に変更（m/d/h/m） %>
 <h1>イベント詳細</h1>
 <p>タイトル：<%= @event.title %></p>
-<p>開始日時：<%= @event.start %></p>
-<p>終了時間：<%= @event.end %></p>
+<%# 後にイベント内容を追加 %>
+<p>開始日時：<%= @event.start.strftime("%Y/%m/%d %H:%M") %></p>
+<p>終了時間：<%= @event.end.strftime("%Y/%m/%d %H:%M") %></p>
+<p><%= link_to "編集", edit_event_path(@event) %></p>
+<p><%= link_to "削除", event_path(@event), data: { turbo_method: :delete } %></p>
