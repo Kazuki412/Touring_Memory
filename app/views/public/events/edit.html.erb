@@ -3,6 +3,9 @@
   <%= f.label :title, "イベントタイトル" %>
   <%= f.text_field :title %><br>
 
+  <%= f.label :detail, "内容" %>
+  <%= f.text_area :detail %><br>
+
   <%= f.label :start, "開始日時" %>
   <%= f.datetime_field :start, value: params[:datetime] %><br>
 

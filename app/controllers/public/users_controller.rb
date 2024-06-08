@@ -10,7 +10,7 @@ class Public::UsersController < ApplicationController
     favorites = Favorite.where(user_id: @user.id).pluck(:blog_id)
     @favorite_blogs = Blog.find(favorites)
     # カレンダー
-    @events = Event.all
+    @my_events = @user.events
     # DM関係
     @current_entry = Entry.where(user_id: current_user.id)
     @another_entry = Entry.where(user_id: @user.id)

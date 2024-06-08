@@ -6,6 +6,7 @@ class Public::EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
+    @event.user_id = current_user.id
     @event.save
     redirect_to user_path(current_user.id)
   end
@@ -32,6 +33,6 @@ class Public::EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :start, :end)
+    params.require(:event).permit(:title, :detail, :start, :end)
   end
 end

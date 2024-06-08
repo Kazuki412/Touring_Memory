@@ -1,7 +1,7 @@
 <%# 現在は作成したイベントが全て表示、後にユーザー毎に変更予定 %>
 <h1>イベント詳細</h1>
 <p>タイトル：<%= @event.title %></p>
-<%# 後にイベント内容を追加 %>
+<p>内容：<%= @event.detail %></p>
 <p>開始日時：<%= @event.start.strftime("%Y/%m/%d %H:%M") %></p>
 <p>終了時間：<%= @event.end.strftime("%Y/%m/%d %H:%M") %></p>
 <p><%= link_to "編集", edit_event_path(@event) %></p>

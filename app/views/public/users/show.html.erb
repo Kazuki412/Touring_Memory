@@ -51,9 +51,11 @@
   <p>ブログタイトル：<%= link_to blog.title, blog_path(blog) %></p>
 <% end %>
 <%# カレンダー %>
-<%= month_calendar events: @events do |date, events| %>
-  <%= date.day %>
-  <% events.each do |event| %>
-      <%= link_to event.title, event_path(event) %>
+<% if @user == current_user %>
+  <%= month_calendar events: @my_events do |date, events| %>
+    <%= date.day %>
+    <% events.each do |event| %>
+        <%= link_to event.title, event_path(event) %>
+    <% end %>
   <% end %>
 <% end %>
