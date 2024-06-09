@@ -1,25 +1,20 @@
 class Public::NotificationsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
-    @notifications = current_user.notifications.order(created_at: :desc)
+    @notifications = current_user.notifications.where(read: false).order(created_at: :desc)
   end
 
-  def mark_as_read
-    @notification = current_user.notifications.find(params[:id])
-    @notification.update(read: true)
-    redirect_to notifiable_path(@notification.notifiable)
-  end
-
-  private
-
-  def notifiable_path(notifiable)
-    case notifiable
-    when Blog
-      blog_path(notifiable)
-    when Favorite
-      blog_favorite_path(notifiable)
-    else
-      root_path
+  def update
+    notification = current_user.notifications.find(params[:id])
+    notification.update(read: true)
+    case notification.notifiable_type
+    when "Blog"
+      redirect_to blog_path(notification.notifiable)
+    when "Favorite"
+      redirect_to blog_path(notification.notifiable)
+    else 
+      redirect_to user_path(notification.notifiable.user)
     end
   end
 end

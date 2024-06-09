@@ -9,4 +9,5 @@ class Favorite < ApplicationRecord
   after_create do
     create_notification(user_id: blog.user_id)
   end
+  
 end
