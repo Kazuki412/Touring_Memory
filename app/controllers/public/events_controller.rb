@@ -1,7 +1,10 @@
 class Public::EventsController < ApplicationController
 
   def new
-    @event = Event.new(start: params[:datetime])
+    @event = Event.new
+    if params[:date]
+      @event.start = Date.parse(params[:date])
+    end
   end
 
   def create

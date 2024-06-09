@@ -69,3 +69,4 @@ end
 gem "devise"
 gem "simple_calendar"
 gem "sassc-rails"
+gem "jquery-rails"

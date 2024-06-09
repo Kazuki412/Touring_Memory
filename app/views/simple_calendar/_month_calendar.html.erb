@@ -22,7 +22,7 @@
       <% date_range.each_slice(7) do |week| %>
         <tr>
           <% week.each do |day| %>
-            <%= content_tag :td, class: calendar.td_classes_for(day), data: { date: day.to_date } do %>
+            <%= content_tag :td, class: calendar.td_classes_for(day), data: { date: day.to_s } do %>
               <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
             <% end %>
           <% end %>
@@ -32,9 +32,13 @@
   </table>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('turbo:load', function() {
       document.querySelectorAll('.simple-calendar .calendar-table td').forEach(function(dayCell) {
-        dayCell.addEventListener('click', function() {
+        dayCell.addEventListener('click', function(event) {
+          // リンクをクリックした場合は処理を中断
+          if (event.target.tagName === "A") {
+            return;
+          }
           var date = this.dataset.date; // クリックした日付を取得
           window.location.href = '/events/new?date=' + date; // 新規イベント作成ページに移動
         });

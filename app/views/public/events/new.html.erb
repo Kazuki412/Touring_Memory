@@ -7,7 +7,7 @@
   <%= f.text_area :detail %><br>
 
   <%= f.label :start, "開始日時" %>
-  <%= f.datetime_field :start, value: params[:datetime] %><br>
+  <%= f.datetime_field :start, default: @event.start %><br>
 
   <%= f.label :end, "終了日時" %>
   <%= f.datetime_field :end, value: params[:datetime] %><br>
