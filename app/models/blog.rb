@@ -11,7 +11,7 @@ class Blog < ApplicationRecord
 
   after_create do
     user.followers.each do |follower|
-      notifications.create(user_id: follower.id)
+      Notification.create(user_id: follower.id, notifiable: self)
     end
   end
 

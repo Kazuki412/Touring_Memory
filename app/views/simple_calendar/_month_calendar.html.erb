@@ -32,16 +32,16 @@
   </table>
 </div>
 <script>
-    document.addEventListener('turbo:load', function() {
-      document.querySelectorAll('.simple-calendar .calendar-table td').forEach(function(dayCell) {
-        dayCell.addEventListener('click', function(event) {
-          // リンクをクリックした場合は処理を中断
-          if (event.target.tagName === "A") {
-            return;
-          }
-          var date = this.dataset.date; // クリックした日付を取得
-          window.location.href = '/events/new?date=' + date; // 新規イベント作成ページに移動
-        });
+  document.addEventListener('turbo:load', function() {
+    document.querySelectorAll('.simple-calendar .calendar-table td').forEach(function(dayCell) {
+      dayCell.addEventListener('click', function(event) {
+        // リンクをクリックした場合は処理を中断
+        if (event.target.tagName === "A") {
+          return;
+        }
+        var date = this.dataset.date; // クリックした日付を取得
+        window.location.href = '/events/new?date=' + date; // 新規イベント作成ページに移動
       });
     });
-  </script>
+  });
+</script>

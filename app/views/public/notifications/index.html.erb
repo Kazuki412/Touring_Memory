@@ -1,0 +1,9 @@
+<h1>通知一覧</h1>
+<ul>
+  <% @notifications.each do |notification| %>
+    <li class="<%= "unread" unless notification.read %>">
+      <%= link_to notification.notifiable_type, notifiable_path(notification.notifiable) %>
+      <%= button_to "Mark as read", mark_as_read_notification_path(notification), method: :patch %>
+    </li>
+  <% end %>
+</ul>
