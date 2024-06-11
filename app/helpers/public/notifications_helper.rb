@@ -12,6 +12,9 @@ module Public::NotificationsHelper
       "#{notification.notifiable.follower.name}さんがあなたをフォローしました"
     when "Message"
       "#{notification.notifiable.user.name}さんからメッセージが届いています"
+    when "Event"
+      "本日「#{notification.notifiable.title}」が予定されています"
     end
   end
+
 end
