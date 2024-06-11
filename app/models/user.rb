@@ -15,11 +15,12 @@ class User < ApplicationRecord
   has_many :blog_comments, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  # DM
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
+  has_many :rooms, through: :entries
   # 通知
   has_many :notifications, dependent: :destroy
-  
   # フォローをした、されたの関係
   has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
