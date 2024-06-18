@@ -1,0 +1,8 @@
+<h1>コメント一覧</h1>
+<% @blog_comments.each do |blog_comment| %>
+  <p>コメントユーザー画像：<%= image_tag blog_comment.user.get_profile_image, size: "50x50" %></p>
+  <p>コメントユーザー名：<%= link_to blog_comment.user.name, admin_user_path(blog_comment.user) %></P>
+  <p>コメント内容：<%= blog_comment.comment %></p>
+  <p>コメント日時：<%= blog_comment.created_at.strftime("%Y/%m/%d %H:%M") %></P>
+  <p><%= link_to "削除", admin_blog_comment_path(blog_comment), data: { turbo_method: :delete } %><p>
+<% end %>

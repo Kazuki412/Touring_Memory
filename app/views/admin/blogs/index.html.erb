@@ -1,1 +1,6 @@
-ブログ一覧
+<h1>ブログ一覧</h1>
+<% @blogs.each do |blog| %>
+  <p>ブログタイトル：<%= link_to blog.title, admin_blog_path(blog) %></p>
+  <p>投稿ユーザー画像：<%= image_tag blog.user.get_profile_image, size: "50x50" %></p>
+  <p>投稿ユーザー名：<%= blog.user.name %></P>
+<% end %>

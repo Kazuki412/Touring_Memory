@@ -1,1 +1,12 @@
-ブログ詳細
+<h1>投稿ユーザー情報</h1>
+<p>ユーザー画像：<%= image_tag @blog.user.get_profile_image, size: "100x100" %></p>
+<p>ユーザー名：<%= @blog.user.name %></p>
+<p>自己紹介：<%= @blog.user.introduction %></p>
+<p>フォロー数：<%= @blog.user.followers.count %></P>
+<p>フォロワー数：<%= @blog.user.followeds.count %></p>
+<%# ステータス機能実装予定 %>
+
+<h2>ブログ内容</h2>
+<p>ブログタイトル：<%= @blog.title %></p>
+<p>本文：<%= @blog.body %></p>
+<p><%= link_to "削除", admin_blog_path(@blog), data: {turbo_method: :delete } %></p>

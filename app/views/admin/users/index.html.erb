@@ -1,6 +1,10 @@
+<h1>ユーザー一覧</h1>
 <% @users.each do |user| %>
-  <%= image_tag user.get_profile_image, size: "100x100" %>
-  <%= link_to user.name, admin_user_path(user) %>
-  <%= user.introduction %>
-  <%# 後に、フォロー・フォロワー数、ステータス編集機能実装予定 %>
+  <p>ユーザー画像：<%= image_tag user.get_profile_image, size: "100x100" %></p>
+  <p>ユーザー名：<%= link_to user.name, admin_user_path(user) %></p>
+  <p>自己紹介：<%= user.introduction %></p>
+  <p>ブログ投稿数：<%= user.blogs.count %></p>
+  <p>フォロー数：<%= user.followers.count %></P>
+  <p>フォロワー数：<%= user.followeds.count %></p>
+  <%# ステータス機能実装予定 %>
 <% end %>
