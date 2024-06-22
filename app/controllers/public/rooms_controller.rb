@@ -1,5 +1,6 @@
 class Public::RoomsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_block, only: [:show]
 
   def create
     @room = Room.create
@@ -28,4 +29,14 @@ class Public::RoomsController < ApplicationController
     redirect_to request.referer
   end
   
+  private
+
+  # ブロックされている場合、トップページへ
+  def check_block
+    @room = Room.find(params[:id])
+    blocked_users = @room.users.joins(:blockers).where(blocks: { blocked_id: current_user.id }).distinct
+    if blocked_users.exists?
+      redirect_to root_path, alert: "このルームにアクセスする権限がありません。"
+    end
+  end
 end

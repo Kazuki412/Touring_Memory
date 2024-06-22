@@ -1,6 +1,6 @@
 <div>
   <p>ユーザー画像：<%= image_tag @blog.user.get_profile_image, size: "100x100" %></p>
-  <p>ユーザー名：<%= @blog.user.name %></p>
+  <p>ユーザー名：<%= link_to @blog.user.name, user_path(@blog.user) %></p>
   <p>自己紹介：<%= @blog.user.introduction %></p>
 </div>
 <div>
@@ -27,9 +27,9 @@
 
 <div>
   <p>コメント件数：<%= @blog.blog_comments.count %></p>
-  <% @blog.blog_comments.each do |blog_comment| %>
+  <% @blog_comments.each do |blog_comment| %>
     <p>コメントしたユーザー画像：<%= image_tag blog_comment.user.get_profile_image, size: "50x50" %></p>
-    <p>コメントしたユーザー名：<%= blog_comment.user.name %></p>
+    <p>コメントしたユーザー名：<%= link_to blog_comment.user.name, user_path(blog_comment.user) %></p>
     <p>コメント内容：<%= blog_comment.comment %></p>
     <p>コメント日時：<%= blog_comment.created_at.strftime("%Y/%m/%d %H:%M") %></p>
   <% if blog_comment.user == current_user %>

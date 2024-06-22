@@ -1,4 +1,5 @@
 class Public::BlogsController < ApplicationController
+  before_action :check_block, only: [:show]
   
   def new
     @blog = Blog.new
@@ -12,12 +13,14 @@ class Public::BlogsController < ApplicationController
   end
   
   def index
-    @blogs = Blog.all
+    # visible_toの解説はブログモデルに記載
+    @blogs = Blog.visible_to(current_user)
   end
 
   def show
     @blog = Blog.find(params[:id])
     @blog_comment = BlogComment.new
+    @blog_comments = @blog.blog_comments.reject { |comment| blocked_comment_user?(comment.user) }
   end
 
   def edit
@@ -40,6 +43,19 @@ class Public::BlogsController < ApplicationController
 
   def blog_params
     params.require(:blog).permit(:title, :body)
+  end
+
+  # ブロックされている場合、トップページへ
+  def check_block
+    @blog = Blog.find(params[:id])
+    if current_user.blocked_by?(@blog.user)
+      redirect_to root_path, alert: "アクセスできません"
+    end
+  end
+
+  # ブロックしているユーザー、もしくはブロックされているユーザーにコメントはそのユーザーには非表示に
+  def blocked_comment_user?(user)
+    current_user.blocking?(user) || current_user.blocked_by?(user)
   end
 
 end

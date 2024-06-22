@@ -32,6 +32,8 @@ class User < ApplicationRecord
   has_many :blockeds, class_name: "Block", foreign_key: "blocked_id", dependent: :destroy
   # ブロックしたユーザー一覧で使用
   has_many :blocking_users, through: :blockers, source: :blocked
+  # ブロックされているかの確認で使用
+  has_many :blocker_users, through: :blockeds, source: :blocker
 
   # プロフィール画像が設定されていない時の処理
   def get_profile_image
@@ -65,5 +67,9 @@ class User < ApplicationRecord
   # ブロックしているかの確認
   def blocking?(user)
     blocking_users.include?(user)
+  end
+  # ブロックされているかの確認
+  def blocked_by?(user)
+    blocker_users.include?(user)
   end
 end

@@ -15,4 +15,9 @@ class Blog < ApplicationRecord
     end
   end
 
+  # ブロックしている・されているの関係にある場合、表示しない
+  scope :visible_to, ->(user) {
+    blocked_user_ids = user.blocking_users.pluck(:id) + user.blocker_users.pluck(:id)
+    where.not(user_id: blocked_user_ids)
+  }
 end

@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  before_action :check_block, only: [:show]
 
   def show
     @user = User.find(params[:id])
@@ -59,4 +60,13 @@ class Public::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:profile_image, :name, :introduction)
   end
+
+  # ブロックされている場合、トップページへ
+  def check_block
+    @user = User.find(params[:id])
+    if current_user.blocked_by?(@user)
+      redirect_to root_path
+    end
+  end
+
 end
